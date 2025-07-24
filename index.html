@@ -11,11 +11,10 @@
 
 <body>
     <div class="banner">
+        <div class="center-image">
+            <img src="./images/center.jpg" alt="Nature Tree">
+        </div>
         <div class="slider">
-            <div class="center-image">
-                <img src="./images/center.jpg" alt="Nature Tree">
-            </div>
-
             <div class="item" style="--i: 1" data-title="Urban Architecture"
                 data-description="Modern cityscape showcasing contemporary architectural design and urban development with stunning glass facades."
                 data-url="https://bdthemes.com/">
@@ -62,6 +61,27 @@
                 data-description="Innovative urban planning and design showcasing the future of city development and architecture."
                 data-url="https://www.elementpack.pro/">
                 <img src="./images/08.jpeg" alt="Urban Innovation">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-btn" id="closeBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modalImg" src="" alt="">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalDescription"></p>
+                    <button class="modal-btn" id="modalBtn">
+                        <span>Learn More</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
