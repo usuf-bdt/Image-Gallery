@@ -266,4 +266,7 @@ document.addEventListener('keydown', (e) => {
 // Initialize the gallery when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const gallery = new RotatingGallery();
+    
+    // Make gallery globally accessible
+    window.gallery = gallery;
 });
