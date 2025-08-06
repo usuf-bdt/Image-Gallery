@@ -8,7 +8,7 @@ class RotatingGallery {
         
         // Configuration
         this.totalItems = this.items.length;
-        this.radius = 420;
+        this.radius = this.getResponsiveRadius();
         this.rotationPaused = false;
         this.currentRotation = 0;
         this.isChanging = false;
@@ -17,12 +17,26 @@ class RotatingGallery {
         this.init();
     }
 
+    getResponsiveRadius() {
+        const width = window.innerWidth;
+        if (width <= 480) {
+            return 180; // Small mobile
+        } else if (width <= 768) {
+            return 220; // Mobile
+        } else if (width <= 1024) {
+            return 300; // Tablet
+        } else {
+            return 420; // Desktop
+        }
+    }
+
     init() {
         this.setupInitialState();
         this.positionItems();
         this.rotationTimeline = this.createRotation();
         this.setupEventListeners();
         this.animateCenterImageFloat();
+        this.setupResizeHandler();
     }
 
     setupInitialState() {
@@ -40,13 +54,31 @@ class RotatingGallery {
             gsap.set(item, {
                 rotationY: angle,
                 rotationX: -15,
-                transformOrigin: "50% 50% -400px",
+                transformOrigin: `50% 50% -${this.radius}px`,
                 z: this.radius,
                 x: 0,
                 y: 0,
                 opacity: 1
             });
         });
+    }
+
+    setupResizeHandler() {
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                this.handleResize();
+            }, 250);
+        });
+    }
+
+    handleResize() {
+        const newRadius = this.getResponsiveRadius();
+        if (newRadius !== this.radius) {
+            this.radius = newRadius;
+            this.positionItems();
+        }
     }
 
     animateCenterImageFloat() {

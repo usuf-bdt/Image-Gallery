@@ -431,3 +431,207 @@ body {
         0 8px 15px rgba(0,0,0,0.3);
 }
 
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet Devices (768px - 1024px) */
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .slider {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .center-image {
+        width: 160px;
+        height: 240px;
+        top: 50%;
+    }
+    
+    .item {
+        width: 100px;
+        height: 150px;
+    }
+    
+    /* Modal adjustments for tablet */
+    .modal-content {
+        max-width: 600px;
+        width: 90%;
+        max-height: 70vh;
+    }
+    
+    .modal-image {
+        height: 300px;
+    }
+    
+    .modal-info h2 {
+        font-size: 24px;
+    }
+    
+    .modal-info p {
+        font-size: 16px;
+    }
+}
+
+/* Mobile Devices (up to 768px) */
+@media screen and (max-width: 768px) {
+    .slider {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .center-image {
+        width: 140px;
+        height: 210px;
+    }
+    
+    .item {
+        width: 80px;
+        height: 120px;
+    }
+    
+    /* Modal adjustments for mobile */
+    .modal-content {
+        width: 95%;
+        max-width: none;
+        max-height: 80vh;
+        border-radius: 20px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .modal-image {
+        height: 200px;
+        margin-bottom: 15px;
+    }
+    
+    .modal-info h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .modal-info p {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    .modal-btn {
+        padding: 10px 24px;
+        font-size: 13px;
+    }
+    
+    .close-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
+
+/* Small Mobile Devices (up to 480px) */
+@media screen and (max-width: 480px) {
+    .slider {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .center-image {
+        width: 120px;
+        height: 180px;
+        top: 50%;
+    }
+    
+    .item {
+        width: 70px;
+        height: 105px;
+    }
+    
+    /* Modal adjustments for small mobile */
+    .modal-content {
+        width: 98%;
+        max-height: 85vh;
+        border-radius: 15px;
+    }
+    
+    .modal-body {
+        padding: 12px;
+    }
+    
+    .modal-image {
+        height: 180px;
+        margin-bottom: 12px;
+    }
+    
+    .modal-info h2 {
+        font-size: 18px;
+    }
+    
+    .modal-info p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .modal-btn {
+        padding: 8px 20px;
+        font-size: 12px;
+    }
+}
+
+/* Landscape Mobile (height < 500px) */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .center-image {
+        width: 100px;
+        height: 150px;
+    }
+    
+    .slider {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .item {
+        width: 60px;
+        height: 90px;
+    }
+    
+    .modal-content {
+        max-height: 90vh;
+    }
+    
+    .modal-image {
+        height: 150px;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .center-image img,
+    .item img,
+    .modal-image img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .center-image {
+        animation: none;
+    }
+    
+    .center-image::before {
+        animation: none;
+    }
+    
+    .modal::before {
+        animation: none;
+    }
+    
+    .item {
+        transition: transform 0.1s ease;
+    }
+    
+    .modal-content {
+        transition: all 0.2s ease;
+    }
+}
+
