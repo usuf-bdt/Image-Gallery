@@ -364,9 +364,28 @@ class RotatingGallery {
     }
 
     goToImage(index) {
-        const targetAngle = (index * 360) / this.totalItems;
+        const currentRotation = (this.currentRotation % 360 + 360) % 360;
+        const itemAngle = 360 / this.totalItems;
+    
+        const currentIndex = Math.round(currentRotation / itemAngle) % this.totalItems;
+    
+        let targetIndex = index;
+        let difference = targetIndex - currentIndex;
+    
+        // Handle shortest path rotation with wrapping
+        if (difference > this.totalItems / 2) {
+            difference -= this.totalItems;
+        } else if (difference < -this.totalItems / 2) {
+            difference += this.totalItems;
+        }
+    
+        const targetRotation = this.currentRotation + difference * itemAngle;
+    
+        // Kill any ongoing rotation tweens
+        gsap.killTweensOf(this.slider);
+    
         gsap.to(this.slider, {
-            rotationY: targetAngle,
+            rotationY: targetRotation,
             duration: 1,
             ease: "power2.inOut",
             onUpdate: () => {
@@ -377,22 +396,56 @@ class RotatingGallery {
             }
         });
     }
-
+    
+    
     nextImage() {
+        const wasPlaying = !this.rotationPaused;
+    
+        // Pause auto-rotation before manual navigation
+        this.rotationTimeline.pause();
+        this.rotationPaused = true;
+    
         const rotation = (this.currentRotation % 360 + 360) % 360;
         const itemAngle = 360 / this.totalItems;
         const currentIndex = Math.round(rotation / itemAngle) % this.totalItems;
         const nextIndex = (currentIndex + 1) % this.totalItems;
+    
         this.goToImage(nextIndex);
+    
+        if (wasPlaying) {
+            setTimeout(() => {
+                this.rotationTimeline.play();
+                this.rotationPaused = false;
+            }, 1100);
+        }
     }
-
+    
     previousImage() {
+        const wasPlaying = !this.rotationPaused;
+    
+        // Pause auto-rotation before manual navigation
+        this.rotationTimeline.pause();
+        this.rotationPaused = true;
+    
         const rotation = (this.currentRotation % 360 + 360) % 360;
         const itemAngle = 360 / this.totalItems;
         const currentIndex = Math.round(rotation / itemAngle) % this.totalItems;
         const prevIndex = (currentIndex - 1 + this.totalItems) % this.totalItems;
+    
         this.goToImage(prevIndex);
+    
+        if (wasPlaying) {
+            setTimeout(() => {
+                this.rotationTimeline.play();
+                this.rotationPaused = false;
+            }, 1100);
+        }
     }
+    
+
+
+
+
 
     randomize() {
         const randomIndex = Math.floor(Math.random() * this.totalItems);
