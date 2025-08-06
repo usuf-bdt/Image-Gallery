@@ -65,6 +65,104 @@
         </div>
     </div>
 
+    <!-- Control Bar -->
+    <div class="control-panel">
+        <div class="control-section">
+            <h3>🎛️ Rotation Controls</h3>
+            <div class="control-group">
+                <label for="rotationSpeed">Speed: <span id="speedValue">30s</span></label>
+                <input type="range" id="rotationSpeed" min="5" max="60" value="30" class="slider-control">
+            </div>
+            <div class="control-group">
+                <label for="rotationDirection">Direction:</label>
+                <select id="rotationDirection" class="select-control">
+                    <option value="clockwise">Clockwise</option>
+                    <option value="counterclockwise">Counter-clockwise</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <button id="playPauseBtn" class="btn-control">⏸️ Pause</button>
+                <button id="resetBtn" class="btn-control">🔄 Reset</button>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <h3>🔄 Loop System</h3>
+            <div class="control-group">
+                <label for="loopMode">Loop Mode:</label>
+                <select id="loopMode" class="select-control">
+                    <option value="continuous">Continuous Loop</option>
+                    <option value="pingpong">Ping Pong</option>
+                    <option value="bounce">Bounce</option>
+                    <option value="reverse">Reverse Loop</option>
+                    <option value="none">No Loop</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="loopCount">Loop Count: <span id="loopCountValue">∞</span></label>
+                <input type="range" id="loopCount" min="0" max="10" value="0" class="slider-control">
+            </div>
+            <div class="control-group">
+                <label for="loopDelay">Loop Delay: <span id="loopDelayValue">0s</span></label>
+                <input type="range" id="loopDelay" min="0" max="5" value="0" step="0.5" class="slider-control">
+            </div>
+        </div>
+
+        <div class="control-section">
+            <h3>🧭 Navigation</h3>
+            <div class="control-group">
+                <button id="prevBtn" class="btn-control">⬅️ Previous</button>
+                <button id="nextBtn" class="btn-control">Next ➡️</button>
+            </div>
+            <div class="control-group">
+                <label>Current: <span id="currentImageIndex">1</span> / <span id="totalImages">8</span></label>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <h3>📐 Display Settings</h3>
+            <div class="control-group">
+                <label for="centerImageSize">Center Size:</label>
+                <select id="centerImageSize" class="select-control">
+                    <option value="small">Small</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="itemSize">Item Size:</label>
+                <select id="itemSize" class="select-control">
+                    <option value="small">Small</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="showHoverEffects" checked>
+                    <span class="checkmark"></span>
+                    Hover Effects
+                </label>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <h3>⚙️ Advanced</h3>
+            <div class="control-group">
+                <label for="rotationRadius">Radius: <span id="radiusValue">420px</span></label>
+                <input type="range" id="rotationRadius" min="200" max="600" value="420" class="slider-control">
+            </div>
+            <div class="control-group">
+                <label for="tiltAngle">Tilt: <span id="tiltValue">15°</span></label>
+                <input type="range" id="tiltAngle" min="0" max="30" value="15" class="slider-control">
+            </div>
+            <div class="control-group">
+                <button id="randomizeBtn" class="btn-control">🎲 Random</button>
+                <button id="fullscreenBtn" class="btn-control">⛶ Fullscreen</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal -->
     <div class="modal" id="modal">
         <div class="modal-content">
