@@ -165,6 +165,50 @@ class RotatingGallery {
             item.addEventListener('mouseleave', () => this.handleItemHover(item, false));
             item.addEventListener('click', () => this.handleItemClick(item));
         });
+
+        // Add center image event listeners
+        this.centerImageContainer.addEventListener('mouseenter', () => this.handleCenterImageHover(true));
+        this.centerImageContainer.addEventListener('mouseleave', () => this.handleCenterImageHover(false));
+        this.centerImageContainer.addEventListener('click', () => this.handleCenterImageClick());
+    }
+
+    handleCenterImageHover(isEnter) {
+        if (isEnter) {
+            // Pause rotation when hovering center image
+            this.rotationTimeline.pause();
+            this.rotationPaused = true;
+            
+            // Add hover effect to center image
+            gsap.to(this.centerImageContainer, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        } else {
+            // Resume rotation when leaving center image
+            this.rotationTimeline.play();
+            this.rotationPaused = false;
+            
+            // Remove hover effect
+            gsap.to(this.centerImageContainer, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        }
+    }
+
+    handleCenterImageClick() {
+        // Get the current front item (the one that matches center image)
+        const rotation = (this.currentRotation % 360 + 360) % 360;
+        const itemAngle = 360 / this.totalItems;
+        const currentIndex = Math.round(rotation / itemAngle) % this.totalItems;
+        const frontItem = this.items[currentIndex];
+        
+        if (frontItem) {
+            // Open modal with the front item
+            showModal(frontItem);
+        }
     }
 
     handleItemClick(item) {
