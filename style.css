@@ -453,13 +453,13 @@ body {
     
     /* Modal adjustments for tablet */
     .modal-content {
-        max-width: 600px;
+        max-width: 460px;
         width: 90%;
-        max-height: 70vh;
+        max-height: 95vh;
     }
     
     .modal-image {
-        height: 300px;
+        height: 250px;
     }
     
     .modal-info h2 {
@@ -490,9 +490,9 @@ body {
     
     /* Modal adjustments for mobile */
     .modal-content {
-        width: 95%;
+        width: 420px;
         max-width: none;
-        max-height: 80vh;
+        max-height: 95vh;
         border-radius: 20px;
     }
     
@@ -501,7 +501,7 @@ body {
     }
     
     .modal-image {
-        height: 200px;
+        height: 180px;
         margin-bottom: 15px;
     }
     
@@ -547,8 +547,8 @@ body {
     
     /* Modal adjustments for small mobile */
     .modal-content {
-        width: 98%;
-        max-height: 85vh;
+        width: 95%;
+        max-height: 90vh;
         border-radius: 15px;
     }
     
