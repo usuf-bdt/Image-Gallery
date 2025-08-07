@@ -528,6 +528,159 @@ body {
     }
 }
 
+/* ===== NAVIGATION AND PAGINATION STYLES ===== */
+
+.navigation-buttons {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.nav-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+.nav-btn svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.nav-btn svg path {
+    stroke: white;
+    stroke-width: 2;
+}
+
+.pagination-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 100;
+}
+
+.pagination-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pagination-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.pagination-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+}
+
+.pagination-dot.active {
+    background: #007b1d;
+}
+
+
+
+/* Responsive Navigation */
+@media screen and (max-width: 768px) {
+    .navigation-buttons {
+        padding: 0 15px;
+    }
+    
+    .nav-btn {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .nav-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .pagination-container {
+        bottom: 20px;
+        gap: 12px;
+    }
+    
+    .pagination-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+
+}
+
+@media screen and (max-width: 480px) {
+    .navigation-buttons {
+        padding: 0 10px;
+    }
+    
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .nav-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .pagination-container {
+        bottom: 15px;
+        gap: 10px;
+    }
+    
+    .pagination-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+
+}
+
 /* ===== CONTROL PANEL STYLES ===== */
 
 .control-panel {
@@ -706,63 +859,7 @@ body {
     transform: translateY(0);
 }
 
-/* Checkbox Controls */
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.9);
-    position: relative;
-    padding-left: 25px;
-}
 
-.checkbox-label input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.checkmark {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 16px;
-    width: 16px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-
-.checkbox-label:hover .checkmark {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.checkbox-label input:checked ~ .checkmark {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-color: #667eea;
-}
-
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-    left: 5px;
-    top: 2px;
-    width: 4px;
-    height: 7px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-.checkbox-label input:checked ~ .checkmark:after {
-    display: block;
-}
 
 /* Control Panel Responsive Design */
 @media screen and (max-width: 1200px) {
