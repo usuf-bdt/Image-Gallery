@@ -13,7 +13,6 @@ class RotatingGallery {
         this.currentRotation = 0;
         this.isChanging = false;
         this.rotationDirection = 'clockwise';
-        this.showHoverEffects = true;
         this.tiltAngle = 15;
         this.isManualMode = false;
         this.rotationSpeed = 30; // Default speed in seconds
@@ -76,17 +75,7 @@ class RotatingGallery {
         });
     }
 
-    updateTiltAngle(newAngle) {
-        this.tiltAngle = newAngle;
-        // Use GSAP's to() method to smoothly animate only the rotationX
-        this.items.forEach((item) => {
-            gsap.to(item, {
-                rotationX: -newAngle,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        });
-    }
+
 
     setupResizeHandler() {
         let resizeTimeout;
@@ -167,8 +156,6 @@ class RotatingGallery {
     }
 
     handleItemHover(item, isEnter) {
-        if (!this.showHoverEffects) return;
-        
         if (isEnter) {
             if (!this.rotationPaused) {
                 this.rotationTimeline.pause();
@@ -281,25 +268,12 @@ class RotatingGallery {
         console.log(`Rotation direction set to ${direction}`);
     }
 
-    setHoverEffects(enabled) {
-        this.showHoverEffects = enabled;
-    }
-
-    setTiltAngle(angle) {
-        this.updateTiltAngle(angle);
-    }
-
-    setRadius(radius) {
-        this.radius = radius;
-        this.positionItems();
-    }
-
     // Rotation control methods
     setRotationMode(mode) {
         if (mode === 'loop') {
-            // Rotation On - Auto rotation with hidden controls
+            // Rotation On - Auto rotation with visible navigation buttons only
             this.isManualMode = false;
-            this.hideNavigationControls();
+            this.showNavigationButtonsOnly();
             this.rotationPaused = false;
             // Recreate rotation timeline to ensure it's in a clean state
             this.recreateRotation();
@@ -329,6 +303,18 @@ class RotatingGallery {
         this.createPaginationDots();
     }
 
+    showNavigationButtonsOnly() {
+        const navigationButtons = document.getElementById('navigationButtons');
+        const paginationContainer = document.getElementById('paginationContainer');
+        
+        if (navigationButtons) {
+            navigationButtons.style.display = 'flex';
+        }
+        if (paginationContainer) {
+            paginationContainer.style.display = 'none';
+        }
+    }
+
     hideNavigationControls() {
         const navigationButtons = document.getElementById('navigationButtons');
         const paginationContainer = document.getElementById('paginationContainer');
@@ -355,7 +341,10 @@ class RotatingGallery {
             dot.className = 'pagination-dot';
             dot.dataset.index = i;
             dot.addEventListener('click', () => {
-                this.goToImage(i);
+                // Only navigate if in manual mode, pagination dots are hidden in auto mode
+                if (this.isManualMode) {
+                    this.goToImage(i);
+                }
             });
             paginationDots.appendChild(dot);
         }
@@ -455,28 +444,6 @@ class RotatingGallery {
     
         this.goToImage(prevIndex);
     }
-    
-
-
-
-
-
-    randomize() {
-        const randomIndex = Math.floor(Math.random() * this.totalItems);
-        this.goToImage(randomIndex);
-    }
-
-    reset() {
-        gsap.to(this.slider, {
-            rotationY: 0,
-            duration: 1,
-            ease: "power2.inOut",
-            onComplete: () => {
-                this.currentRotation = 0;
-                this.updateCenterImage();
-            }
-        });
-    }
 
     getCurrentImageIndex() {
         const rotation = (this.currentRotation % 360 + 360) % 360;
@@ -523,13 +490,25 @@ class ControlManager {
         
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
-                this.gallery.previousImage();
+                // If in auto mode, just navigate without switching to manual mode
+                if (!this.gallery.isManualMode) {
+                    this.gallery.previousImage();
+                } else {
+                    // If already in manual mode, navigate normally
+                    this.gallery.previousImage();
+                }
             });
         }
         
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
-                this.gallery.nextImage();
+                // If in auto mode, just navigate without switching to manual mode
+                if (!this.gallery.isManualMode) {
+                    this.gallery.nextImage();
+                } else {
+                    // If already in manual mode, navigate normally
+                    this.gallery.nextImage();
+                }
             });
         }
 

@@ -43,6 +43,7 @@ body {
     z-index: 2;
     cursor: pointer;
     transition: transform 0.3s ease;
+    animation: floatAnimation 6s ease-in-out infinite;
 }
 
 /* Animated border effect */
@@ -85,21 +86,7 @@ body {
     transition: opacity 0.5s ease;
 }
 
-/* Image change animation */
-@keyframes imageChange {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
+
 
 .center-image.changing img {
     opacity: 0;
@@ -124,10 +111,6 @@ body {
     75% {
         transform: translate(-49%, -50%);
     }
-}
-
-.center-image {
-    animation: floatAnimation 6s ease-in-out infinite;
 }
 
 /* Shine effect during transition */
@@ -421,6 +404,22 @@ body {
 /* ===== RESPONSIVE DESIGN ===== */
 
 /* Tablet Devices (768px - 1024px) */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .pagination-container {
+        position: fixed;
+        bottom: calc(50% - 50px);
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 12px;
+    }
+    
+    .pagination-dot {
+        width: 11px;
+        height: 11px;
+    }
+}
+
+/* Tablet Devices (768px - 1024px) */
 @media screen and (max-width: 1024px) and (min-width: 768px) {
     .slider {
         width: 160px;
@@ -641,7 +640,10 @@ body {
     }
     
     .pagination-container {
-        bottom: 20px;
+        position: fixed;
+        bottom: calc(30% - 50px);
+        left: 50%;
+        transform: translateX(-50%);
         gap: 12px;
     }
     
@@ -669,7 +671,10 @@ body {
     }
     
     .pagination-container {
-        bottom: 15px;
+        position: fixed;
+        bottom: calc(35% - 50px);
+        left: 50%;
+        transform: translateX(-50%);
         gap: 10px;
     }
     
@@ -830,37 +835,6 @@ body {
     color: #fff;
 }
 
-/* Button Controls */
-.btn-control {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-    width: 100%;
-    margin-bottom: 5px;
-}
-
-.btn-control:last-child {
-    margin-bottom: 0;
-}
-
-.btn-control:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
-}
-
-.btn-control:active {
-    transform: translateY(0);
-}
-
-
-
 /* Control Panel Responsive Design */
 @media screen and (max-width: 1200px) {
     .control-panel {
@@ -891,11 +865,6 @@ body {
         margin-bottom: 10px;
         gap: 6px;
     }
-    
-    .btn-control {
-        padding: 6px 10px;
-        font-size: 11px;
-    }
 }
 
 @media screen and (max-width: 480px) {
@@ -920,12 +889,7 @@ body {
         margin-bottom: 8px;
         gap: 5px;
     }
-    
-    .btn-control {
-        padding: 5px 8px;
-        font-size: 10px;
-    }
-    
+
     .control-group label {
         font-size: 11px;
     }
