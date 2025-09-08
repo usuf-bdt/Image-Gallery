@@ -1,0 +1,540 @@
+.ps-orbit-container {
+    position: relative;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.ps-orbit-container:not(.initialized) {
+    display: block;
+}
+
+.ps-orbit-container:not(.initialized) .ps-orbit-banner {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.ps-orbit-container:not(.initialized) .ps-orbit-center-image {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.ps-orbit-container:not(.initialized) .ps-orbit-slider {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ps-orbit-container:not(.initialized) .ps-orbit-item {
+    position: relative;
+    flex: 0 0 auto;
+    margin: 5px;
+}
+
+.ps-orbit-banner {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+}
+
+.ps-orbit-slider {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+}
+
+.ps-orbit-center-image {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 2;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: floatAnimation 6s ease-in-out infinite;
+}
+
+.ps-orbit-center-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes floatAnimation {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%);
+    }
+
+    25% {
+        transform: translate(-51%, -49%);
+    }
+
+    50% {
+        transform: translate(-50%, -51%);
+    }
+
+    75% {
+        transform: translate(-49%, -50%);
+    }
+}
+
+.ps-orbit-item {
+    position: absolute;
+    width: 120px;
+    height: 180px;
+    left: 50%;
+    margin-left: -60px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.ps-orbit-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ps-orbit-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ps-orbit-modal-content {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    padding: 40px;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1002;
+}
+
+.ps-orbit-modal.show .ps-orbit-modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.ps-orbit-close-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #ff8484;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1003;
+}
+
+.ps-orbit-modal-content-wrapper {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.ps-orbit-modal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+}
+
+.ps-orbit-modal.show .ps-orbit-modal-left {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.ps-orbit-modal-image {
+    max-width: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.ps-orbit-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.ps-orbit-modal-image:hover img {
+    transform: scale(1.05);
+}
+
+.ps-orbit-modal-right {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(50px);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+}
+
+.ps-orbit-modal.show .ps-orbit-modal-right {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.ps-orbit-modal-right .ps-orbit-modal-title {
+    color: #0d0925;
+    font-size: 30px;
+    margin: 10px 0px;
+}
+
+.ps-orbit-modal-right .ps-orbit-modal-description {
+    color: #0d0925;
+    margin: 0px 0px 10px;
+}
+
+.ps-orbit-modal-btn {
+    background-color: #000000ba;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .4s cubic-bezier(.25, .46, .45, .94);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 180px;
+}
+
+.ps-orbit-modal-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.ps-orbit-modal-btn:hover::before {
+    left: 100%;
+}
+
+.ps-orbit-modal-btn:hover {
+    transform: translateY(-2px) scale(1.01);
+}
+
+.ps-orbit-modal-btn span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ps-orbit-modal-btn .ps-orbit-svg-icon {
+    fill: white;
+}
+
+/* Tablet Devices (768px - 1024px) */
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .ps-orbit-slider {
+        width: 160px;
+        height: 160px;
+    }
+
+    .ps-orbit-center-image {
+        width: 160px;
+        height: 240px;
+        top: 50%;
+    }
+
+    .ps-orbit-item {
+        width: 100px;
+        height: 150px;
+        left: 50%;
+        margin-left: -50px;
+    }
+
+    .ps-orbit-modal-right .ps-orbit-modal-title {
+        margin-bottom: 15px;
+    }
+
+    .ps-orbit-modal-right .ps-orbit-modal-description {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    .ps-orbit-modal-btn {
+        padding: 12px 24px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .ps-orbit-slider {
+        width: 120px;
+        height: 120px;
+    }
+
+    .ps-orbit-center-image {
+        width: 140px;
+        height: 210px;
+    }
+
+    .ps-orbit-item {
+        width: 80px;
+        height: 120px;
+        left: 50%;
+        margin-left: -40px;
+    }
+
+    .ps-orbit-modal-content {
+        flex-direction: column;
+    }
+
+    .ps-orbit-modal-left {
+        flex: none;
+        height: 300px;
+        width: 100%;
+    }
+
+    .ps-orbit-modal-image {
+        max-width: 100%;
+        height: 100%;
+    }
+
+    .ps-orbit-modal-right {
+        flex: none;
+        justify-content: center;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+
+    .ps-orbit-modal-right .ps-orbit-modal-title {
+        margin-bottom: 15px;
+    }
+
+    .ps-orbit-modal-right .ps-orbit-modal-description {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .ps-orbit-modal-btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    .ps-orbit-close-btn {
+        top: 15px;
+        right: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .ps-orbit-slider {
+        width: 100px;
+        height: 100px;
+    }
+
+    .ps-orbit-center-image {
+        width: 120px;
+        height: 180px;
+        top: 50%;
+    }
+
+    .ps-orbit-item {
+        width: 70px;
+        height: 105px;
+        left: 50%;
+        margin-left: -35px;
+    }
+
+    .ps-orbit-modal-content {
+        padding: 30px;
+    }
+
+    .ps-orbit-close-btn {
+        top: 0;
+        right: 10px;
+    }
+
+    .ps-orbit-modal-left {
+        margin-top: 20px;
+    }
+
+    .ps-orbit-modal-right {
+        margin-top: 20px;
+    }
+
+    .ps-orbit-modal-right .ps-orbit-modal-title {
+        font-size: 1.5rem;
+        margin-bottom: 0px;
+    }
+
+    .ps-orbit-modal-right .ps-orbit-modal-description {
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .ps-orbit-modal-btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+}
+
+.ps-orbit-navigation-buttons {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.ps-orbit-nav-btn {
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: auto;
+    background-color: transparent;
+}
+
+.ps-orbit-nav-btn:active {
+    transform: scale(1.1);
+}
+
+.ps-orbit-nav-btn i {
+    font-size: 20px;
+}
+
+.ps-orbit-pagination-container {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 100;
+}
+
+.ps-orbit-pagination-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.ps-orbit-pagination-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.ps-orbit-pagination-dot.active {
+    background: #00a02b;
+}
+
+/* Responsive Navigation */
+@media screen and (max-width: 768px) {
+    .ps-orbit-navigation-buttons {
+        padding: 0 15px;
+    }
+
+    .ps-orbit-nav-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .ps-orbit-nav-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .ps-orbit-pagination-container {
+        bottom: calc(30% - 30px);
+    }
+
+    .ps-orbit-pagination-dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .ps-orbit-navigation-buttons {
+        padding: 0 10px;
+    }
+
+    .ps-orbit-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .ps-orbit-nav-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .ps-orbit-pagination-container {
+        bottom: calc(35% - 30px);
+    }
+
+    .ps-orbit-pagination-dot {
+        width: 8px;
+        height: 8px;
+    }
+}
